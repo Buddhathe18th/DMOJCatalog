@@ -30,11 +30,12 @@ def searchFloor(row,col,floor,neighboors):
     except:
         print(end="")
 
-    try:
-        if floor[row-1][col]==".":
-            neighboors=searchFloor(row-1,col,floor, neighboors)
-    except:
-        print(end="")
+    if row!=0:
+        try:
+            if floor[row-1][col]==".":
+                neighboors=searchFloor(row-1,col,floor, neighboors)
+        except:
+            print(end="")
     try:
         if floor[row][col+1]==".":
             neighboors=searchFloor(row,col+1,floor,neighboors)
@@ -42,11 +43,12 @@ def searchFloor(row,col,floor,neighboors):
     except:
         print(end="")
 
-    try:
-        if floor[row][col-1]==".":
-            neighboors=searchFloor(row,col+-1,floor, neighboors)
-    except:
-        print(end="")
+    if col!=0:
+        try:
+            if floor[row][col-1]==".":
+                neighboors=searchFloor(row,col+-1,floor, neighboors)
+        except:
+            print(end="")
 
     return neighboors
 
@@ -57,15 +59,19 @@ while roomsLeft(floor)!=False:
 
 
 
-print(rooms)
 rooms.sort(reverse=True)
 
 sum=0
 i=0
-while sum+rooms[i]<=flooringAvailible:
-    sum=sum+rooms[i]
-    i=i+1
 
+try:
+    while sum+rooms[i]<=flooringAvailible:
+        sum=sum+rooms[i]
+        i=i+1
+except:
+    print(end="")
 
-print(i)
-print(flooringAvailible-sum)
+if i!=1:
+    print(str(i)+" rooms, "+str(flooringAvailible-sum)+" square metre(s) left over")
+else:
+    print(str(i)+" room, "+str(flooringAvailible-sum)+" square metre(s) left over")
